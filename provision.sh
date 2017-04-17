@@ -15,6 +15,7 @@ sudo apt-get install -y \
     curl \
     exuberant-ctags \
     git \
+    httpie \
     libbz2-dev \
     libncurses5-dev \
     libncursesw5-dev \
@@ -30,6 +31,10 @@ sudo apt-get install -y \
     wget \
     xz-utils \
     zlib1g-dev
+
+# configure nginx
+sudo rm /etc/nginx/sites-enabled/default > /dev/null 2>&1
+sudo service nginx reload
 
 # install vimrc
 if [ ! -d ~/.vim ] ; then
@@ -87,6 +92,7 @@ sudo -u postgres createdb $PROJECT
 virtualenv venv
 . ./venv/bin/activate
 pip install \
+    ipython \
     peewee \
     psycopg2 \
     requests \
