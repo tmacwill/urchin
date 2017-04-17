@@ -79,14 +79,19 @@ fi
 mkdir ~/$PROJECT
 cd ~/$PROJECT
 
+# create postgres user and database
+sudo -u postgres psql -c "create user $PROJECT with password '$PROJECT' superuser login createrole createdb"
+sudo -u postgres createdb $PROJECT
+
 # install pip packages
 virtualenv venv
 . ./venv/bin/activate
 pip install \
-    psycopg2 \
     peewee \
+    psycopg2 \
     requests \
-    sanic
+    sanic \
+    watchdog
 
 # install npm packages, using separate lines because big install causes some crazy filesystem error?
 npm install "babel-loader"
